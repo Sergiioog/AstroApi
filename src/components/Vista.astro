@@ -16,13 +16,20 @@
     
                 data.results.forEach(character => {
                     var tarjetaPersonaje = document.createElement('div');
-                    tarjetaPersonaje.classList.add('bg-slate-100', 'border-black', 'border-2', 'h-40', 'w-40', 'flex', 
+                    tarjetaPersonaje.classList.add('bg-slate-100', 'border-black', 'border-2', 'h-auto', 'w-40', 'flex', 
                     'flex-col', 'justify-center', 'items-center', 'm-5');
                     
                 
                     tarjetaPersonaje.innerHTML =
                         `<div>
-                            <p>${character.name}</p>
+                            <div>
+                                <h1>${character.name}</h1>
+                            </div>
+                            <div>
+                                <img src="${character.image}" alt="${character.name}"></img>
+                            </div>
+                            
+                            
                         </div>`;
     
                     divPersonajes?.appendChild(tarjetaPersonaje);
@@ -37,8 +44,9 @@
 
 <!-- Vista.astro -->
 <main class="flex-1 bg-slate-400 p-5 flex justify-around items-center">
+
     <div id="divPersonajes" class="flex flex-wrap justify-center items-center text-center bg-red-500">
-        <!-- La lista de personajes se agregará aquí dinámicamente -->
+        
     </div>
 </main>
 
