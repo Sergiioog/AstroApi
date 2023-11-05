@@ -4,37 +4,44 @@
         const personajesURL = 'https://rickandmortyapi.com/api/character';
     
         fetch(personajesURL)
-            .then(response => {
+            
+        .then(response => {
                 if (response.ok) {
                     return response.json();
                 } else {
                     throw new Error("Fallo al cargar los recursos");
                 }
-            })
-            .then(data => {
+        })
+            
+        .then(data => {
                 const divPersonajes = document.querySelector('#divPersonajes');
     
                 data.results.forEach(character => {
+                    console.log(character.name);
                     var tarjetaPersonaje = document.createElement('div');
-                    tarjetaPersonaje.classList.add('bg-slate-100', 'border-black', 'border-2', 'h-auto', 'w-40', 'flex', 
+                    tarjetaPersonaje.classList.add('bg-slate-100', 'border-black', 'border-2', 'h-80', 'w-60', 'flex', 
                     'flex-col', 'justify-center', 'items-center', 'm-5');
                     
                 
-                    tarjetaPersonaje.innerHTML =
-                        `<div>
+                    tarjetaPersonaje.innerHTML = `
+                        <div style="overflow:hidden;">
                             <div>
-                                <h1>${character.name}</h1>
+                                <h1 style="font-size:20px ; font-weight:bold">${character.name}</h1>
                             </div>
                             <div>
-                                <img src="${character.image}" alt="${character.name}"></img>
+                                <p><i><b>Estado:</i></b>${character.status}</p>
+                                <p><i><b>Especie:</i></b>${character.species}</p>
+                                <p><i><b>Origen:</i></b>${character.origin.name}</p>
                             </div>
-                            
-                            
+                            <div>
+                                <img src="${character.image}" alt="${character.name}" style="">
+                            </div>
                         </div>`;
-    
+
                     divPersonajes?.appendChild(tarjetaPersonaje);
                 });
             })
+            
             .catch(error => {
                 console.error('Error:', error);
             });
@@ -43,10 +50,8 @@
     
 
 <!-- Vista.astro -->
-<main class="flex-1 bg-slate-400 p-5 flex justify-around items-center">
-
-    <div id="divPersonajes" class="flex flex-wrap justify-center items-center text-center bg-red-500">
-        
+<main class="flex-1 bg-slate-400 p-5 flex justify-around items-center ">
+    <div id="divPersonajes" class="flex flex-wrap justify-center items-center text-center"> 
     </div>
 </main>
 
