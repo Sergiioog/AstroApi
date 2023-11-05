@@ -1,48 +1,54 @@
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const personajesURL = 'https://rickandmortyapi.com/api/character';
+<script> //No he podido realizar el JS con los --- porque no mostraba los datos de la API
+
     
-        fetch(personajesURL)
+    document.addEventListener('DOMContentLoaded', () => { //Funcion que genera el script después de que se haya cargado el DOM
+        const personajesURL = 'https://rickandmortyapi.com/api/character'; //Variable al lugar de donde cargamos los datos
+    
+        fetch(personajesURL) //Peticion a la URL de los Personajes
             
-        .then(response => {
-                if (response.ok) {
+        .then(response => { //Dependiendo de la respuesta
+                if (response.ok) { //Si es ok entonces pasará la respuesta en un json
                     return response.json();
-                } else {
+                } else { // si no lanza un error
                     throw new Error("Fallo al cargar los recursos");
                 }
         })
             
-        .then(data => {
-                const divPersonajes = document.querySelector('#divPersonajes');
-    
-                data.results.forEach(character => {
-                    console.log(character.name);
-                    var tarjetaPersonaje = document.createElement('div');
-                    tarjetaPersonaje.classList.add('bg-slate-100', 'border-black', 'border-2', 'h-80', 'w-60', 'flex', 
-                    'flex-col', 'justify-center', 'items-center', 'm-5');
+        .then(data => { //Para los datos cargados
+
+                const divPersonajes = document.querySelector('#divPersonajes'); //Div del HTML donde cargaremos los divs 
+                                                                                //de los personajes de manera dinámica
+                data.results.forEach(personaje => { //ForEach, que itera sobre los resultados y por cada personaje
+                    //(He tratado de todas las maneras de indicarle un tipo para personaje, desde ponerlo al lado hasta crear una interfaz 
+                    //con sus atributos y sus tipos, pero no he podido arreglar el error aunque no influya en el código.)
+                   
+                    var tarjetaPersonaje = document.createElement('div'); //se crea un div llamado tarjetaPersonaje
+                    tarjetaPersonaje.classList.add('bg-slate-100', 'border-whitesmoke', 'border-2', 'h-80', 'w-60', 'flex', 
+                    'flex-col', 'justify-center', 'items-center', 'm-5'); //Se le añade estos atributos de clase
                     
-                
-                    tarjetaPersonaje.innerHTML = `
-                        <div style="overflow:hidden;">
+                    //En el elemento que se genere creamos un div de forma dinámica con los valores extraidos de la api
+                    tarjetaPersonaje.innerHTML = ` 
+                        <div style="overflow:hidden; background-color:#678E35">
                             <div>
-                                <h1 style="font-size:20px ; font-weight:bold">${character.name}</h1>
+                                <h1 style="font-size:20px ; font-weight:bold">${personaje.name}</h1>
                             </div>
                             <div>
-                                <p><i><b>Estado:</i></b>${character.status}</p>
-                                <p><i><b>Especie:</i></b>${character.species}</p>
-                                <p><i><b>Origen:</i></b>${character.origin.name}</p>
+                                <p><i><b>Estado:</i></b>${personaje.status}</p>
+                                <p><i><b>Especie:</i></b>${personaje.species}</p>
+                                <p><i><b>Origen:</i></b>${personaje.origin.name}</p>
                             </div>
                             <div>
-                                <img src="${character.image}" alt="${character.name}" style="">
+                                <img src="${personaje.image}" alt="${personaje.name}" style="padding:20px">
                             </div>
                         </div>`;
 
-                    divPersonajes?.appendChild(tarjetaPersonaje);
+                    divPersonajes?.appendChild(tarjetaPersonaje); /*Se le inserta el div creado en el div del HTML divPersonajes (la ? es por 
+                    si el elemento es nulo)*/
                 });
             })
             
-            .catch(error => {
+            .catch(error => { //Si hay algun error que lo muestre
                 console.error('Error:', error);
             });
     });
@@ -52,6 +58,7 @@
 <!-- Vista.astro -->
 <main class="flex-1 bg-slate-400 p-5 flex justify-around items-center ">
     <div id="divPersonajes" class="flex flex-wrap justify-center items-center text-center"> 
+        <!--No se rellena el div ya que dentro se van a meter los generados dinámicamente-->
     </div>
 </main>
 
