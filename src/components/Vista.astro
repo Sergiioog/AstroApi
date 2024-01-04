@@ -19,7 +19,7 @@
 
                 const divPersonajes = document.querySelector('#divPersonajes'); //Div del HTML donde cargaremos los divs 
                                                                                 //de los personajes de manera dinámica
-                data.results.forEach(personaje => { //ForEach, que itera sobre los resultados y por cada personaje
+                data.results.forEach((personaje: { name: any; status: any; species: any; origin: { name: any; }; image: any; }) => { //ForEach, que itera sobre los resultados y por cada personaje
                     //(He tratado de todas las maneras de indicarle un tipo para personaje, desde ponerlo al lado hasta crear una interfaz 
                     //con sus atributos y sus tipos, pero no he podido arreglar el error aunque no influya en el código.)
                    
